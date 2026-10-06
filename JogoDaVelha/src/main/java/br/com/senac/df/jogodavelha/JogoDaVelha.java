@@ -37,6 +37,8 @@ public class JogoDaVelha {
                 tabuleiro.setJogadorDaVez(2);
                 
                  tabuleiro.mostrarTabuleiro();
+                 tabuleiro.verificarGanhador(jogador1.getSimbolo(),jogador1.getNome());
+                
             }
             else{
                 
@@ -46,6 +48,8 @@ public class JogoDaVelha {
             
             tabuleiro.marcarJogada(jogador2.getSimbolo(), local);
             tabuleiro.setJogadorDaVez(1);
+            tabuleiro.mostrarTabuleiro();
+            
       
         }while(tabuleiro.isHouveGanhadorUltimaRodada()== false);
         
