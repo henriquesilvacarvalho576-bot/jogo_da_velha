@@ -14,7 +14,7 @@ public class Tabuleiro {
     private String regras;
     private boolean houveGanhadorUltimaRodada;
     private int jogadorDaVez;
-    private char a1, a2, a3, b1, b2, b3, c1, c2, c3;
+    private char a1 = ' ', a2 = ' ', a3 = ' ', b1 = ' ', b2 = ' ', b3 = ' ', c1 = ' ', c2 = ' ', c3 = ' ';
 
     public int getJogadorDaVez() {
         return jogadorDaVez;
@@ -67,28 +67,50 @@ public class Tabuleiro {
         this.jogadorDaVez = 1;
     }
     
-    public void verificarGanhador (){
-    
-      
+    public void verificarGanhador (char simbolo){
+        if (a1 == simbolo && a2 == simbolo && a3 == simbolo){
+        this.houveGanhadorUltimaRodada = true;
+        }
+        else if (b1 == simbolo && b2 == simbolo && b3 == simbolo){
+        this.houveGanhadorUltimaRodada = true;
+        }
+        else if (c1 == simbolo && c2 == simbolo && c3 == simbolo){
+        this.houveGanhadorUltimaRodada = true;
+        }
+        else if (a1 == simbolo && b2 == simbolo && c3 == simbolo){
+        this.houveGanhadorUltimaRodada = true;
+        }
+        else if (a1 == simbolo && b1 == simbolo && c1 == simbolo){
+        this.houveGanhadorUltimaRodada = true;
+        }
+        else if (a3 == simbolo && b3 == simbolo && c3 == simbolo){
+        this.houveGanhadorUltimaRodada = true;
+        }
+        else if (c1 == simbolo && b2 == simbolo && a3 == simbolo){
+        this.houveGanhadorUltimaRodada = true;
+        }
+        else if (a2 == simbolo && b2 == simbolo && c3 == simbolo){
+        this.houveGanhadorUltimaRodada = true;
+    }
 }
     public void organizar(){
         
     }
     public void mostrarTabuleiro(){
-        System.out.print("""
-                              |     |     
-                           A1 |  B1 |  C1  
+        System.out.printf("""
+                           A  |  B  |  C   
+                        1  %C  |  %C  |  %C  
                          _____|_____|_____
                          
-                           A2 |  B2 |     
-                              |     |  C2   
+                        2  %C  |  %C  |  %C   
+                              |     |     
                          _____|_____|_____
                          
-                           A3 |  B3 |  C3   
-                              |     |    
+                        3  %C  |  %C  |  %C   
+                              |     |       
                          
                               |     |     
-                         """);
+                         """, a1,b1,c1,a2,b2,c2,a3,b3,c3);
     }
     
     public void marcarJogada(char simbolo, String coordenada){

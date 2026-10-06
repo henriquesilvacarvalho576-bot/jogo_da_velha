@@ -21,7 +21,7 @@ public class JogoDaVelha {
         Tabuleiro tabuleiro = new Tabuleiro("1 - UCada jogador deve escolher um simbolo; 2 - O jogador 1 inicia a partida");
         
         Jogador jogador1 = new Jogador(1, "Henrique", 'X');
-        Jogador jogador = new Jogador(2, "João", 'O');
+        Jogador jogador2 = new Jogador(2, "João", 'O');
         
         tabuleiro.mostrarTabuleiro();
         
@@ -33,13 +33,19 @@ public class JogoDaVelha {
                 String local = entrada.nextLine();
                 
                 tabuleiro.marcarJogada(jogador1.getSimbolo(), local);
+                
+                tabuleiro.setJogadorDaVez(2);
+                
+                 tabuleiro.mostrarTabuleiro();
             }
             else{
                 
             }
             System.out.println("Jogador 2, escolha onde jogar: ");
+            String local = entrada.nextLine();
             
-            tabuleiro.setHouveGanhadorUltimaRodada(true);
+            tabuleiro.marcarJogada(jogador2.getSimbolo(), local);
+            tabuleiro.setJogadorDaVez(1);
       
         }while(tabuleiro.isHouveGanhadorUltimaRodada()== false);
         
