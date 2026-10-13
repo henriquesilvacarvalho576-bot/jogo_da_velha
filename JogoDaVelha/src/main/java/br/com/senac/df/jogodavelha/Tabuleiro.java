@@ -12,7 +12,7 @@ public class Tabuleiro {
     private int notaJ1;
     private int notaJ2;
     private String regras;
-    private boolean houveGanhadorUltimaRodada;
+    private boolean houveganhadorUltimarodada;
     private int jogadorDaVez;
     private char a1 = ' ', a2 = ' ', a3 = ' ', b1 = ' ', b2 = ' ', b3 = ' ', c1 = ' ', c2 = ' ', c3 = ' ';
 
@@ -24,16 +24,13 @@ public class Tabuleiro {
         this.jogadorDaVez = jogadorDaVez;
     }
 
-    public boolean isHouveGanhadorUltimaRodada() {
-        return houveGanhadorUltimaRodada;
+    public boolean isHouveganhadorUltimarodada() {
+        return houveganhadorUltimarodada;
     }
 
-    public void setHouveGanhadorUltimaRodada(boolean houveGanhadorUltimaRodada) {
-        this.houveGanhadorUltimaRodada = houveGanhadorUltimaRodada;
+    public void setHouveganhador(boolean houveganhador) {
+        this.houveganhadorUltimarodada = houveganhador;
     }
-    
-
-    
 
     public int getNotaJ1() {
         return notaJ1;
@@ -63,91 +60,121 @@ public class Tabuleiro {
         this.regras = regras;
         this.notaJ1 = 0;
         this.notaJ2 = 0;
-        this.houveGanhadorUltimaRodada = false;
+        this.houveganhadorUltimarodada = false;
         this.jogadorDaVez = 1;
     }
-    
-    public void verificarGanhador (char simbolo, String nome){
-        if (a1 == simbolo && a2 == simbolo && a3 == simbolo){
-        this.houveGanhadorUltimaRodada = true;
-        }
-        else if (b1 == simbolo && b2 == simbolo && b3 == simbolo){
-        this.houveGanhadorUltimaRodada = true;
-        }
-        else if (c1 == simbolo && c2 == simbolo && c3 == simbolo){
-        this.houveGanhadorUltimaRodada = true;
-        }
-        else if (a1 == simbolo && b2 == simbolo && c3 == simbolo){
-        this.houveGanhadorUltimaRodada = true;
-        }
-        else if (a1 == simbolo && b1 == simbolo && c1 == simbolo){
-        this.houveGanhadorUltimaRodada = true;
-        }
-        else if (a3 == simbolo && b3 == simbolo && c3 == simbolo){
-        this.houveGanhadorUltimaRodada = true;
-        }
-        else if (c1 == simbolo && b2 == simbolo && a3 == simbolo){
-        this.houveGanhadorUltimaRodada = true;
-        }
-        else if (a2 == simbolo && b2 == simbolo && c3 == simbolo){
-        this.houveGanhadorUltimaRodada = true;
-        
-        if (this.houveGanhadorUltimaRodada){
-            System.out.println("Houve um vencedor!" + nome);
+
+    public void verificarGanhador(char simbolo, String nome){
+        boolean venceu = false;
+
+        if(a1 == simbolo && a2 == simbolo && a3 == simbolo) venceu = true;
+        else if (b1 == simbolo && b2 == simbolo && b3 == simbolo) venceu = true;
+        else if (c1 == simbolo && c2 == simbolo && c3 == simbolo) venceu = true;
+        else if (a1 == simbolo && b2 == simbolo && c3 == simbolo) venceu = true;
+        else if (a3 == simbolo && b3 == simbolo && c3 == simbolo) venceu = true;
+        else if (a2 == simbolo && b2 == simbolo && c2 == simbolo) venceu = true;
+        else if (a3 == simbolo && b2 == simbolo && c1 == simbolo) venceu = true;
+        else if (a1 == simbolo && b1 == simbolo && c1 == simbolo) venceu = true;
+
+        if (venceu) {
+            this.houveganhadorUltimarodada = true;
+            
+            // Incrementa o placar com base no símbolo do jogador
+            if (simbolo == 'X') {
+                this.notaJ1++;
+            } else {
+                this.notaJ2++;
+            }
+
+            // Exibe o placar
+            System.out.println("\n==============================");
+            System.out.println("Parabens " + nome + ", voce fez o básico!");
+            System.out.println("--- PLACAR DA PARTIDA ---");
+            System.out.println("Jogador 1 (X): " + this.notaJ1 + " ponto(s)");
+            System.out.println("Jogador 2 (O): " + this.notaJ2 + " ponto(s)");
+            System.out.println("==============================\n");
         }
     }
-}
+
     public void organizar(){
         
-    }
+    }    
+
     public void mostrarTabuleiro(){
-        System.out.printf("""
-                           A  |  B  |  C   
-                        1  %C  |  %C  |  %C  
-                         _____|_____|_____
-                         
-                        2  %C  |  %C  |  %C   
-                              |     |     
-                         _____|_____|_____
-                         
-                        3  %C  |  %C  |  %C   
-                              |     |       
-                         
-                              |     |     
-                         """, a1,b1,c1,a2,b2,c2,a3,b3,c3);
+          System.out.printf("""
+                                  |        |        
+                         1        |        |        
+                               %c      %c      %c
+                                  |        |        
+                            -------+-------+-------
+                                  |        |        
+                         2     %c  |   %c    |  %c
+                                  |        |        
+                            -------+-------+-------
+                                  |        |        
+                         3    %c   |   %c    |   %c  
+                                  |        |        
+                            """,a1,a2,a3,b1,b2,b3,c1,c2,c3);
     }
     
     public void marcarJogada(char simbolo, String coordenada){
-       switch(coordenada){
-           case "A1":
-                   this.a1 = simbolo;
-               break;
-           case "A2":
-                   this.a2 = simbolo;
-                   break;
-           case "A3":
-                   this.a3 = simbolo;
-                   break;
-           case "B1":
-                   this.b1 = simbolo;
-                   break;
-           case "B2":
-                   this.b2 = simbolo;
-                   break;
-           case "B3":
-                   this.b3 = simbolo;
-                   break;
-           case "C1":
-                   this.c1 = simbolo;
-                   break;
-           case "C2":
-                   this.c2 = simbolo;
-                   break;
-           case "C3":
-                   this.c3 = simbolo;
-       } 
-            
+          switch(coordenada){
+              case "a1":
+                  this.a1 = simbolo;
+                  break;
+              case "a2":
+                  this.a2 = simbolo;
+                  break;
+              case "a3":
+                  this.a3 = simbolo;
+                  break;
+              case "b1":
+                  this.b1 = simbolo;
+                  break;
+              case "b2":
+                  this.b2 = simbolo;
+                  break;
+              case "b3":
+                  this.b3 = simbolo;
+                  break;
+              case "c1":
+                  this.c1 = simbolo;
+                  break;
+              case "c2":
+                  this.c2 = simbolo;
+                  break;
+              case "c3":
+                  this.c3 = simbolo;
+                  break;
+          }
     }
-}
+
+    public boolean posicaoEstaVazia(String coordenada) {
+        switch (coordenada.toLowerCase()) {
+            case "a1": return this.a1 == ' ';
+            case "a2": return this.a2 == ' ';
+            case "a3": return this.a3 == ' ';
+            case "b1": return this.b1 == ' ';
+            case "b2": return this.b2 == ' ';
+            case "b3": return this.b3 == ' ';
+            case "c1": return this.c1 == ' ';
+            case "c2": return this.c2 == ' ';
+            case "c3": return this.c3 == ' ';
+            default: return false;
+        }
+    }
+}   
+ 
+    
+          
+  
+    
+
+    
+         
+    
+        
+    
 
 
+       
