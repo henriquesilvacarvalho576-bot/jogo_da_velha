@@ -14,8 +14,8 @@ public class JogoDaVelha {
         
         Tabuleiro tabuleiro = new Tabuleiro("1 - cada jogador deve escolher um simbolo; 2 - um jogador inicia a partida");
         
-        Jogador jogador1 = new Jogador(1, "Miguel", 'X');
-        Jogador jogador2 = new Jogador(2, "spider", 'O');
+        Jogador jogador1 = new Jogador(1, "Henrique", 'X');
+        Jogador jogador2 = new Jogador(2, "Junior", 'O');
           
         tabuleiro.mostrarTabuleiro();
         
