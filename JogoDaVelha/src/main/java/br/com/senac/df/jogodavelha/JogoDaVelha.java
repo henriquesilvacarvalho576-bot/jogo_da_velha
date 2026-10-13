@@ -25,34 +25,30 @@ public class JogoDaVelha {
         
         tabuleiro.mostrarTabuleiro();
         
-        do{
+       do{
             tabuleiro.mostrarTabuleiro();
             
             if(tabuleiro.getJogadorDaVez() == 1){
-                System.out.println("Jogador 1, escolha onde jogar: ");
-                String local = entrada.nextLine();
-                
-                tabuleiro.marcarJogada(jogador1.getSimbolo(), local);
-                
-                tabuleiro.setJogadorDaVez(2);
-                
-                 tabuleiro.mostrarTabuleiro();
-                 tabuleiro.verificarGanhador(jogador1.getSimbolo(),jogador1.getNome());
-                
-            }
-            else{
-                
-            }
-            System.out.println("Jogador 2, escolha onde jogar: ");
+            System.out.println("Jogador1, escolha onde jogar: ");
             String local = entrada.nextLine();
             
-            tabuleiro.marcarJogada(jogador2.getSimbolo(), local);
+            tabuleiro.marcarJogada(jogador1.getSimbolo(),local);
+            tabuleiro.setJogadorDaVez(2);
+            tabuleiro.mostrarTabuleiro();
+            tabuleiro.verificarGanhador(jogador1.getSimbolo(),jogador1.getNome());
+            }
+            else{
+                  System.out.println("jogador 2, escolha onde jogar");
+            String local = entrada.nextLine();
+            
+            tabuleiro.marcarJogada(jogador2.getSimbolo(),local);
             tabuleiro.setJogadorDaVez(1);
             tabuleiro.mostrarTabuleiro();
+            }
             
-      
-        }while(tabuleiro.isHouveGanhadorUltimaRodada()== false);
-        
-       
-   }     
-}
+
+           
+              
+          }while(tabuleiro.isHouveGanhadorUltimaRodada()== false);
+        }
+    }
